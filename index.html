@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Open Shared Video</title>
+
+<meta name="description" content="Open the shared video directly in Google Drive with one click.">
+
+<meta property="og:title" content="Open Shared Video">
+<meta property="og:description" content="Open the shared video directly in Google Drive.">
+<meta property="og:type" content="website">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f1f8f2">
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --green: #188038;
+    --green-dark: #137333;
+    --background: #f1f8f2;
+    --text: #202b24;
+    --muted: #647067;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--background);
+    color: var(--text);
+}
+
+.drive-page {
+    display: grid;
+    min-height: 100vh;
+    min-height: 100svh;
+    place-items: center;
+    padding: 32px 20px;
+
+    background:
+    radial-gradient(
+        ellipse at 84% 12%,
+        rgba(185, 225, 190, 0.45),
+        transparent 34%
+    ),
+    var(--background);
+}
+
+.drive-content {
+    width: 100%;
+    max-width: 760px;
+}
+
+/* BRAND */
+
+.drive-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.brand-icon {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    place-items: center;
+    border-radius: 9px;
+    background: #dff0e2;
+    color: var(--green);
+}
+
+.brand-icon svg {
+    width: 21px;
+    height: 21px;
+}
+
+/* BANNER */
+
+.drive-banner-wrap {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 9px;
+    background: linear-gradient(
+        135deg,
+        #b6d8b9,
+        #dcefe0,
+        #8bbd94
+    );
+}
+
+.drive-banner {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.drive-banner-label {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 8px 12px;
+
+    border-radius: 5px;
+    background: rgba(20, 35, 25, 0.78);
+    color: white;
+
+    font-size: 12px;
+    font-weight: 600;
+    backdrop-filter: blur(8px);
+}
+
+/* DETAILS */
+
+.drive-details {
+    padding: 28px 2px 0;
+}
+
+.drive-eyebrow {
+    margin-bottom: 10px;
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.drive-details h1 {
+    font-size: 30px;
+    line-height: 1.2;
+    font-weight: 750;
+}
+
+.drive-description {
+    margin: 11px 0 23px;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* BUTTON */
+
+.drive-open-button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+
+    width: 100%;
+    min-height: 54px;
+
+    padding: 0 18px;
+
+    border: none;
+    border-radius: 6px;
+
+    background: var(--green);
+    color: white;
+
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 14px rgba(24, 128, 56, 0.18);
+
+    transition: 0.2s ease;
+}
+
+.drive-open-button:hover {
+    background: var(--green-dark);
+    transform: translateY(-1px);
+}
+
+.drive-open-button svg {
+    width: 20px;
+    height: 20px;
+}
+
+.button-arrow {
+    margin-left: auto;
+}
+
+/* SECURITY NOTE */
+
+.drive-safe-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    margin-top: 18px;
+
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.drive-safe-note svg {
+    width: 16px;
+    height: 16px;
+    color: var(--green);
+}
+
+/* MOBILE */
+
+@media (max-width: 480px) {
+
+    .drive-page {
+        padding: 24px 16px;
+    }
+
+    .drive-details {
+        padding-top: 23px;
+    }
+
+    .drive-details h1 {
+        font-size: 27px;
+    }
+
+    .drive-description {
+        font-size: 14px;
+    }
+
+    .drive-open-button {
+        min-height: 52px;
+        font-size: 14px;
+    }
+}
+
+/* DESKTOP */
+
+@media (min-width: 640px) {
+
+    .drive-page {
+        padding: 52px 28px;
+    }
+
+    .drive-details h1 {
+        font-size: 34px;
+    }
+
+    .drive-open-button {
+        width: fit-content;
+        min-width: 290px;
+    }
+
+    .drive-safe-note {
+        justify-content: flex-start;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<main class="drive-page">
+
+<section class="drive-content">
+
+<!-- BRAND -->
+
+<a
+    class="drive-brand"
+    href="https://drive.google.com/"
+    aria-label="Google Drive"
+>
+
+    <span class="brand-icon">
+
+        <svg viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.8">
+
+            <path d="M3 7.5h7l2 2H21v9H3z"/>
+            <path d="M3 7.5V5h7l2 2"/>
+        </svg>
+
+    </span>
+
+    <span>Shared video</span>
+
+</a>
+
+
+<!-- VIDEO BANNER -->
+
+<div class="drive-banner-wrap">
+
+    <img
+        class="drive-banner"
+        src="https://drive.google.com/thumbnail?id=1-MFXB7CpZunNWRXzdl009nf2TCarht4X&sz=w1365"
+        alt="Shared video preview"
+        onerror="this.style.display='none'"
+    >
+
+    <span class="drive-banner-label">
+
+        <svg viewBox="0 0 24 24"
+        width="17" height="17"
+        fill="none" stroke="currentColor"
+        stroke-width="1.8">
+
+            <rect x="3" y="4" width="18" height="16" rx="2"/>
+            <path d="m10 9 5 3-5 3z"/>
+
+        </svg>
+
+        Video preview
+
+    </span>
+
+</div>
+
+
+<!-- VIDEO DETAILS -->
+
+<div class="drive-details">
+
+    <p class="drive-eyebrow">
+        GOOGLE DRIVE
+    </p>
+
+    <h1 id="page-title">
+        Your video is ready
+    </h1>
+
+    <p class="drive-description">
+        Open the shared video directly in Google Drive.
+    </p>
+
+
+    <!-- OPEN BUTTON -->
+
+    <a
+        href="https://drive.google.com/file/d/1-MFXB7CpZunNWRXzdl009nf2TCarht4X/view"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="drive-open-button"
+    >
+
+        <svg viewBox="0 0 24 24"
+        fill="none" stroke="currentColor"
+        stroke-width="1.8">
+
+            <path d="M3 7.5h7l2 2H21v9H3z"/>
+            <path d="M3 7.5V5h7l2 2"/>
+
+        </svg>
+
+        <span>Open in Google Drive</span>
+
+        <svg
+            class="button-arrow"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+        >
+
+            <path d="M7 17 17 7"/>
+            <path d="M7 7h10v10"/>
+
+        </svg>
+
+    </a>
+
+
+    <!-- SECURITY NOTE -->
+
+    <div class="drive-safe-note">
+
+        <svg viewBox="0 0 24 24"
+        fill="none" stroke="currentColor"
+        stroke-width="1.8">
+
+            <path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z"/>
+            <path d="m9 12 2 2 4-4"/>
+
+        </svg>
+
+        <span>
+            Shared via Google Drive
+        </span>
+
+    </div>
+
+</div>
+
+</section>
+
+</main>
+
+</body>
+</html>
